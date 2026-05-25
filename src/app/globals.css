@@ -133,9 +133,7 @@ body {
   transition: background-color 0.15s ease-in-out;
 }
 
-.excel-table tbody tr:hover {
-  background-color: #f8fafc;
-}
+
 
 .excel-table td {
   font-size: 0.9rem;

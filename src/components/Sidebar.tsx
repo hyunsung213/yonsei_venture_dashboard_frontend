@@ -61,7 +61,7 @@ export const Sidebar: React.FC = () => {
             className="object-contain shrink-0"
           />
           <span className="text-[#002060] text-sm font-bold tracking-tight">
-            연세 미래창업지원단 자금관리
+            YONSEI 미래창업지원단 자금관리
           </span>
         </Link>
         <button
@@ -108,9 +108,6 @@ export const Sidebar: React.FC = () => {
               연세
               <span className="block mt-0.5 text-zinc-600 text-sm font-semibold">미래창업지원단</span>
             </h1>
-            <p className="text-[9px] text-[#002060]/50 uppercase tracking-widest font-bold mt-1">
-              자금 관리 시스템
-            </p>
           </div>
         </div>
 

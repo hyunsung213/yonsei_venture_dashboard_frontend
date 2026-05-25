@@ -19,7 +19,7 @@ COPY . .
 
 # NEXT_PUBLIC_ vars are baked in at build time.
 # Pass the backend API URL via build arg (defaults to backend service name in docker-compose).
-ARG NEXT_PUBLIC_API_BASE=http://backend:5000/api
+ARG NEXT_PUBLIC_API_BASE=/api
 ENV NEXT_PUBLIC_API_BASE=${NEXT_PUBLIC_API_BASE}
 
 # Disable Next.js telemetry during build

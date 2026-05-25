@@ -714,7 +714,7 @@ export default function TeamDetailPage({ params }: PageProps) {
               </thead>
               <tbody>
                 {processedExpenses.map((row) => (
-                  <tr key={row.id}>
+                  <tr key={row.id} className="hover:bg-slate-50 transition-colors">
                     <td className="font-mono text-slate-600">
                       {row.executed_at ? row.executed_at.substring(5) : "-"}
                     </td>
@@ -780,10 +780,7 @@ export default function TeamDetailPage({ params }: PageProps) {
 
       {/* Create & Edit Expense Modal */}
       {isModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-          <div className="absolute inset-0 bg-slate-900/40 backdrop-blur-sm" onClick={() => setIsModalOpen(false)} />
-          
-          <div className="w-full max-w-lg glass-card overflow-hidden relative z-10 animate-slide-in">
+        <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
             {/* Modal Header */}
             <div className="px-6 py-4 border-b border-slate-200 flex items-center justify-between">
               <h3 className="font-bold text-lg text-slate-800">
@@ -1002,8 +999,7 @@ export default function TeamDetailPage({ params }: PageProps) {
                 </button>
               </div>
             </form>
-          </div>
-        </div>
+        </Modal>
       )}
 
       {/* Delete Confirmation Modal for Expense */}

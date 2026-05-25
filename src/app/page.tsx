@@ -46,7 +46,7 @@ function DashboardContent() {
   // Search & Filter State
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedType, setSelectedType] = useState<string>("All");
-  const [selectedSeason, setSelectedSeason] = useState<string>("All");
+
 
   // Sorting States
   const [sortField, setSortField] = useState<"support_fund_balance" | "talent_scholarship_balance" | null>(null);
@@ -220,12 +220,11 @@ function DashboardContent() {
     return true; // all
   });
 
-  // Filtering Teams (검색어, 개별 팀 유형, 시즌 추가 필터링)
+  // Filtering Teams (검색어, 개별 팀 유형)
   const filteredTeams = categoryTeams.filter((t) => {
     const matchesSearch = t.team_name.toLowerCase().includes(searchTerm.toLowerCase());
     const matchesType = selectedType === "All" || t.team_type === selectedType;
-    const matchesSeason = selectedSeason === "All" || t.season === selectedSeason;
-    return matchesSearch && matchesType && matchesSeason;
+    return matchesSearch && matchesType;
   });
 
   // Calculate Aggregates
@@ -271,8 +270,8 @@ function DashboardContent() {
   const localPracticalTeams = sortedTeams.filter((t) => t.team_type === "Wave-Local-Practical");
   const localExperienceTeams = sortedTeams.filter((t) => t.team_type === "Wave-Local-Experience");
 
-  const renderTeamRow = (team: DashboardTeam) => (
-    <tr key={team.id} className="group/row">
+  const renderTeamRow = (team: DashboardTeam, index: number) => (
+    <tr key={team.id} className={`group/row ${index % 2 === 1 ? 'bg-slate-50' : 'bg-white'} hover:bg-slate-100 transition-colors`}>
       <td className="font-semibold text-slate-800">
         <Link
           href={`/teams/${team.id}`}
@@ -327,10 +326,10 @@ function DashboardContent() {
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
           <h1 className="text-3xl font-extrabold tracking-tight text-slate-900">
-            창업 자금 현황 대시보드
+            WAVE - LAB & LOCAL 대시보드
           </h1>
           <p className="text-sm text-slate-500 mt-1.5">
-            미래창업지원단 소속 팀들의 지원금 및 인재장학금 예산과 실시간 지출 내역을 관리합니다.
+            WAVE-LAB & LOCAL 소속 팀들의 지원금 및 인재장학금 예산과 실시간 지출 내역을 관리합니다.
           </p>
         </div>
         <div className="flex items-center gap-2">
@@ -491,18 +490,7 @@ function DashboardContent() {
             ))}
           </select>
 
-          <select
-            value={selectedSeason}
-            onChange={(e) => setSelectedSeason(e.target.value)}
-            className="px-3.5 py-2 glass-input text-xs font-medium cursor-pointer text-slate-700"
-          >
-            <option value="All">전체 시즌</option>
-            {SEASONS.map((s) => (
-              <option key={s} value={s}>
-                {SEASON_NAMES[s]}
-              </option>
-            ))}
-          </select>
+
         </div>
       </div>
 
@@ -559,22 +547,22 @@ function DashboardContent() {
                   <>
                     {lab1Teams.length > 0 && (
                       <>
-                        <tr className="bg-slate-50/80 no-copy">
-                          <td colSpan={5} className="font-bold text-[#002060] text-xs px-5 py-2.5 border-y border-slate-200/80 tracking-wide bg-blue-50/20">
+                        <tr className="bg-slate-200/60 no-copy">
+                          <td colSpan={5} className="font-bold text-[#002060] text-xs px-5 py-2.5 border-y border-slate-300 tracking-wide bg-blue-100/60">
                             LAB-1부
                           </td>
                         </tr>
-                        {lab1Teams.map(renderTeamRow)}
+                        {lab1Teams.map((team, index) => renderTeamRow(team, index))}
                       </>
                     )}
                     {lab2Teams.length > 0 && (
                       <>
-                        <tr className="bg-slate-50/80 no-copy">
-                          <td colSpan={5} className="font-bold text-[#002060] text-xs px-5 py-2.5 border-y border-slate-200/80 tracking-wide bg-blue-50/20">
+                        <tr className="bg-slate-200/60 no-copy">
+                          <td colSpan={5} className="font-bold text-[#002060] text-xs px-5 py-2.5 border-y border-slate-300 tracking-wide bg-blue-100/60">
                             LAB-2부
                           </td>
                         </tr>
-                        {lab2Teams.map(renderTeamRow)}
+                        {lab2Teams.map((team, index) => renderTeamRow(team, index))}
                       </>
                     )}
                     {lab1Teams.length === 0 && lab2Teams.length === 0 && (
@@ -589,22 +577,22 @@ function DashboardContent() {
                   <>
                     {localPracticalTeams.length > 0 && (
                       <>
-                        <tr className="bg-slate-50/80 no-copy">
-                          <td colSpan={5} className="font-bold text-[#002060] text-xs px-5 py-2.5 border-y border-slate-200/80 tracking-wide bg-blue-50/20">
+                        <tr className="bg-slate-200/60 no-copy">
+                          <td colSpan={5} className="font-bold text-[#002060] text-xs px-5 py-2.5 border-y border-slate-300 tracking-wide bg-blue-100/60">
                             LOCAL-실전창업형
                           </td>
                         </tr>
-                        {localPracticalTeams.map(renderTeamRow)}
+                        {localPracticalTeams.map((team, index) => renderTeamRow(team, index))}
                       </>
                     )}
                     {localExperienceTeams.length > 0 && (
                       <>
-                        <tr className="bg-slate-50/80 no-copy">
-                          <td colSpan={5} className="font-bold text-[#002060] text-xs px-5 py-2.5 border-y border-slate-200/80 tracking-wide bg-blue-50/20">
+                        <tr className="bg-slate-200/60 no-copy">
+                          <td colSpan={5} className="font-bold text-[#002060] text-xs px-5 py-2.5 border-y border-slate-300 tracking-wide bg-blue-100/60">
                             LOCAL-창업체험형
                           </td>
                         </tr>
-                        {localExperienceTeams.map(renderTeamRow)}
+                        {localExperienceTeams.map((team, index) => renderTeamRow(team, index))}
                       </>
                     )}
                     {localPracticalTeams.length === 0 && localExperienceTeams.length === 0 && (
@@ -616,7 +604,7 @@ function DashboardContent() {
                     )}
                   </>
                 ) : (
-                  sortedTeams.map(renderTeamRow)
+                  sortedTeams.map((team, index) => renderTeamRow(team, index))
                 )}
               </tbody>
             </table>
