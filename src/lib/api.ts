@@ -1,6 +1,7 @@
 import { TeamType, Season } from "./constants";
 
-export const API_BASE = "http://localhost:5000/api";
+export const API_BASE =
+  process.env.NEXT_PUBLIC_API_BASE ?? "http://localhost:5000/api";
 
 export type DashboardTeam = {
   id: number;

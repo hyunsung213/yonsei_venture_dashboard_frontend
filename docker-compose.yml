@@ -1,0 +1,24 @@
+services:
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        # Change this to match where your backend API actually runs
+        NEXT_PUBLIC_API_BASE: http://backend:5000/api
+    image: yonsei-frontend:latest
+    container_name: yonsei_frontend
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+    restart: unless-stopped
+    # If you run the backend in the same compose stack, add it here:
+    # depends_on:
+    #   - backend
+    # networks:
+    #   - app-network
+
+# networks:
+#   app-network:
+#     driver: bridge

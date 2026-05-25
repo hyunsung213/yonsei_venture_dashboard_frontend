@@ -1,0 +1,28 @@
+# Git
+.git
+.gitignore
+
+# Node modules (installed fresh inside Docker)
+node_modules
+
+# Next.js build cache
+.next
+
+# Logs
+*.log
+npm-debug.log*
+
+# Env files (do not leak secrets into the image)
+.env*
+!.env.example
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode
+.idea
+
+# Testing
+coverage
